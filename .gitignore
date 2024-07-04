@@ -1,0 +1,8 @@
+node_modules/
+
+# Vite
+client/build
+client/.cache
+
+# Ignore any generated files
+dist/
