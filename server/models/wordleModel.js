@@ -1,16 +1,33 @@
 class WordleGame {
-  constructor(targetWord) {
-    this.targetWord = targetWord.toLowerCase();
+  constructor(wordLength = 5, guessesAmount = 6) {
+    this.wordLength = wordLength;
+    this.guessesAmount = guessesAmount;
+    this.wordList = require("./getWordList")(wordLength);
+    this.targetWord =
+      this.wordList[Math.floor(Math.random() * this.wordList.length)];
+    console.log(this.targetWord);
+  }
+
+  setRandomTargetWord() {
+    this.targetWord =
+      this.wordList[Math.floor(Math.random() * this.wordList.length)];
+  }
+
+  setTargetWord(word) {
+    if (word.length !== this.wordLength || !this.wordList.includes(word)) {
+      throw new Error(`Word must be a valid ${this.wordLength}-letter word`);
+    }
+    this.targetWord = word;
   }
 
   checkGuess(guess) {
-    guess = guess.toLowerCase();
-    if (guess.length !== 5) {
-      throw new Error("Guess must be a 5-letter word");
-    }
-
     if (guess === this.targetWord) {
       return { result: "correct" };
+    }
+
+    guess = guess.toLowerCase();
+    if (guess.length !== this.wordLength || !this.wordList.includes(guess)) {
+      throw new Error(`Guess must be a valid ${this.wordLength}-letter word`);
     }
 
     const letterInfo = guess.split("").map((letter, index) => {
@@ -24,6 +41,14 @@ class WordleGame {
     });
 
     return { result: "incorrect", letter_info: letterInfo };
+  }
+
+  getWordLength() {
+    return this.wordLength;
+  }
+
+  getGuessesAmount() {
+    return this.guessesAmount;
   }
 }
 

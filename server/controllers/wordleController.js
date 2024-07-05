@@ -1,7 +1,6 @@
 const WordleGame = require("../models/wordleModel");
 
-const targetWord = "apple";
-const game = new WordleGame(targetWord);
+const game = new WordleGame();
 
 exports.checkGuess = (req, res) => {
   if (!req.body.guess) {
@@ -15,4 +14,12 @@ exports.checkGuess = (req, res) => {
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
+};
+
+exports.getGuessesAmount = (req, res) => {
+  res.json({ guessesAmount: game.getGuessesAmount() });
+};
+
+exports.getWordLength = (req, res) => {
+  res.json({ wordLength: game.getWordLength() });
 };

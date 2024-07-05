@@ -4,6 +4,6 @@ export interface LetterInfo {
 }
 
 export interface Guess {
-  result: string;
+  result: "correct" | "incorrect" | "unknown";
   letter_info: LetterInfo[];
 }
