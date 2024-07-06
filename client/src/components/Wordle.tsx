@@ -8,7 +8,6 @@ export default function Wordle() {
   const [wordLength, setWordLength] = useState<number>(0);
   const [isGameOver, setIsGameOver] = useState(false);
   const [guesses, setGuesses] = useState<Guess[]>([]);
-  const [guessesAmount, setGuessesAmount] = useState<number>(0);
   const [currentGuess, setCurrentGuess] = useState<LetterInfo[]>([]);
   const [lettersInfo, setLettersInfo] = useState({});
 
@@ -30,7 +29,6 @@ export default function Wordle() {
           "http://localhost:5000/api/wordle/guessesamount"
         );
         const data = await response.json();
-        setGuessesAmount(data.guessesAmount);
         setGuesses(new Array(data.guessesAmount).fill(null));
       } catch (error) {
         console.error("Failed to fetch guesses amount:", error);
@@ -59,12 +57,6 @@ export default function Wordle() {
       }
       // handle response
       let data: Guess = await response.json();
-      data.letter_info.forEach((element) => {
-        setLettersInfo((prevLettersInfo) => ({
-          ...prevLettersInfo,
-          [element.letter]: element.status,
-        }));
-      });
       if (data.result === "correct") {
         setIsGameOver(true);
         data = {
@@ -74,6 +66,12 @@ export default function Wordle() {
             status: "correct",
           })),
         };
+        data.letter_info.forEach((element) => {
+          setLettersInfo((prevLettersInfo) => ({
+            ...prevLettersInfo,
+            [element.letter]: element.status,
+          }));
+        });
       }
 
       setGuesses((prevGuesses) => {

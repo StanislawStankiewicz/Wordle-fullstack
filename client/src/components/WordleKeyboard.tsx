@@ -11,51 +11,23 @@ export default function WordleKeyboard({
 
   return (
     <div className="wordle-keyboard">
-      <div className="wordle-keyboard-row">
-        {line1.map((key) => (
-          <button
-            key={key}
-            style={{
-              backgroundColor: getBackgroundColor(
-                lettersInfo?.[key.toLowerCase()]
-              ),
-            }}
-            onClick={() => onKeyPressed(key)}
-          >
-            {key}
-          </button>
-        ))}
-      </div>
-      <div className="wordle-keyboard-row">
-        {line2.map((key) => (
-          <button
-            key={key}
-            style={{
-              backgroundColor: getBackgroundColor(
-                lettersInfo?.[key.toLowerCase()]
-              ),
-            }}
-            onClick={() => onKeyPressed(key)}
-          >
-            {key}
-          </button>
-        ))}
-      </div>
-      <div className="wordle-keyboard-row">
-        {line3.map((key) => (
-          <button
-            key={key}
-            onClick={() => onKeyPressed(key)}
-            style={{
-              backgroundColor: getBackgroundColor(
-                lettersInfo?.[key.toLowerCase()]
-              ),
-            }}
-          >
-            {key}
-          </button>
-        ))}
-      </div>
+      {[line1, line2, line3].map((line, i) => (
+        <div key={i} className="wordle-keyboard-row">
+          {line.map((key) => (
+            <button
+              key={key}
+              style={{
+                backgroundColor: getBackgroundColor(
+                  lettersInfo?.[key.toLowerCase()]
+                ),
+              }}
+              onClick={() => onKeyPressed(key)}
+            >
+              {key}
+            </button>
+          ))}
+        </div>
+      ))}
     </div>
   );
 }
