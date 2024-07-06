@@ -5,10 +5,17 @@
   text-align: center;
 }
 
-.game-rows {
+.wordle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.wordle-rows {
   display: grid;
   flex-direction: row;
   align-items: center;
+  margin-bottom: 2rem;
 }
 
 .row {
@@ -22,4 +29,17 @@
   min-width: 3rem;
   min-height: 3rem;
   margin: 0.5rem;
+}
+
+.wordle-keyboard {
+}
+
+.wordle-keyboard-row button {
+  border-radius: 5px;
+  font-size: 2rem;
+  min-width: 3rem;
+  min-height: 3rem;
+  margin: 0.5rem;
+  border: 0px;
+  cursor: pointer;
 }

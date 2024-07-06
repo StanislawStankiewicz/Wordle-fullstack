@@ -1,11 +1,11 @@
 import "./App.css";
 
-import GameRows from "./components/GameRows.tsx";
+import Wordle from "./components/Wordle.tsx";
 
 function App() {
   return (
     <>
-      <GameRows />
+      <Wordle />
     </>
   );
 }
