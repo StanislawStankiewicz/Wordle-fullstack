@@ -9,7 +9,7 @@ export default function Wordle() {
   const [isGameOver, setIsGameOver] = useState(false);
   const [guesses, setGuesses] = useState<Guess[]>([]);
   const [currentGuess, setCurrentGuess] = useState<LetterInfo[]>([]);
-  const [lettersInfo, setLettersInfo] = useState({});
+  const [lettersData, setLettersData] = useState({});
 
   useEffect(() => {
     const fetchWordLength = async () => {
@@ -66,14 +66,8 @@ export default function Wordle() {
             status: "correct",
           })),
         };
-        data.letter_info.forEach((element) => {
-          setLettersInfo((prevLettersInfo) => ({
-            ...prevLettersInfo,
-            [element.letter]: element.status,
-          }));
-        });
       }
-
+      setLettersData(updateLettersInfo(lettersData, data.letter_info));
       setGuesses((prevGuesses) => {
         const newGuesses = [...prevGuesses];
         for (let i = 0; i < newGuesses.length; i++) {
@@ -146,7 +140,30 @@ export default function Wordle() {
   return (
     <div className="wordle">
       <WordleRows guesses={modifiedGuesses} wordLength={wordLength} />
-      <WordleKeyboard onKeyPressed={onKeyPressed} lettersInfo={lettersInfo} />
+      <WordleKeyboard onKeyPressed={onKeyPressed} lettersData={lettersData} />
     </div>
   );
+}
+
+function updateLettersInfo(
+  data: { [key: string]: string },
+  lettersInfo: LetterInfo[]
+) {
+  for (const letter of lettersInfo) {
+    if (letter.status === "correct") {
+      data[letter.letter] = "correct";
+    }
+    if (letter.status === "present") {
+      if (data[letter.letter] !== "correct") {
+        data[letter.letter] = "present";
+      }
+    }
+    if (letter.status === "incorrect") {
+      if (data[letter.letter] === undefined) {
+        data[letter.letter] = "incorrect";
+      }
+    }
+  }
+  console.log(data);
+  return data;
 }

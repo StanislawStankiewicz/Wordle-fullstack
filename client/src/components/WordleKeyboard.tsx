@@ -1,14 +1,13 @@
 export default function WordleKeyboard({
   onKeyPressed,
-  lettersInfo,
+  lettersData,
 }: {
   onKeyPressed: (key: string) => void;
-  lettersInfo: { [key: string]: string };
+  lettersData: { [key: string]: string };
 }) {
   const line1 = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "Backspace"];
   const line2 = ["A", "S", "D", "F", "G", "H", "J", "K", "L", "Enter"];
   const line3 = ["Z", "X", "C", "V", "B", "N", "M"];
-
   return (
     <div className="wordle-keyboard">
       {[line1, line2, line3].map((line, i) => (
@@ -18,12 +17,18 @@ export default function WordleKeyboard({
               key={key}
               style={{
                 backgroundColor: getBackgroundColor(
-                  lettersInfo?.[key.toLowerCase()]
+                  lettersData?.[key.toLowerCase()]
                 ),
               }}
               onClick={() => onKeyPressed(key)}
             >
-              {key}
+              {key === "Backspace" ? (
+                <img src={`/backspace.svg`} alt="Backspace" />
+              ) : key === "Enter" ? (
+                <img src={`/enter.svg`} alt="Enter" />
+              ) : (
+                key
+              )}
             </button>
           ))}
         </div>

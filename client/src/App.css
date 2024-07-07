@@ -31,7 +31,14 @@
   margin: 0.5rem;
 }
 
-.wordle-keyboard {
+.wordle-keyboard-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .wordle-keyboard-row button {
@@ -42,4 +49,34 @@
   margin: 0.5rem;
   border: 0px;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.wordle-keyboard-row img {
+  width: 1.8rem;
+  height: 1.8rem;
+}
+
+@media (max-width: 1000px) {
+  .wordle-keyboard-row button {
+    min-width: 2.5rem;
+    min-height: 2.5rem;
+    margin: 0.4rem;
+  }
+}
+
+@media (max-width: 800px) {
+  .wordle-keyboard-row button {
+    font-size: 1.5rem;
+    min-width: 2rem;
+    min-height: 2rem;
+    margin: 0.2rem;
+  }
+  .wordle-keyboard-row img {
+    width: 1.4rem;
+    height: 1.4rem;
+  }
 }

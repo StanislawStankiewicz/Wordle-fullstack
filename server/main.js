@@ -9,12 +9,7 @@ const PORT = process.env.PORT || 5000;
 
 app.use(logger);
 
-const whitelist = [
-  "https://www.yoursite.com",
-  "http://127.0.0.1:5500",
-  "http://localhost:3500",
-  "http://localhost:5173",
-];
+const whitelist = ["http://localhost:5173", `http://localhost:${PORT}`];
 const corsOptions = {
   origin: (origin, callback) => {
     if (whitelist.indexOf(origin) !== -1 || !origin) {

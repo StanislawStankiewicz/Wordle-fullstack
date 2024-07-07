@@ -3,14 +3,17 @@ class WordleGame {
     this.wordLength = wordLength;
     this.guessesAmount = guessesAmount;
     this.wordList = require("./getWordList")(wordLength);
-    this.targetWord =
-      this.wordList[Math.floor(Math.random() * this.wordList.length)];
-    console.log(this.targetWord);
+    this.setRandomTargetWord();
+
+    setInterval(() => {
+      this.setRandomTargetWord();
+    }, 1000 * 60 * 60 * 24);
   }
 
   setRandomTargetWord() {
     this.targetWord =
       this.wordList[Math.floor(Math.random() * this.wordList.length)];
+    console.log(this.targetWord);
   }
 
   setTargetWord(word) {
