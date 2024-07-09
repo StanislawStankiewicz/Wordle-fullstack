@@ -8,7 +8,6 @@ const wordList = fs
   .split("\n");
 
 const getWordList = (wordLength) => {
-  console.log(wordList[0].length);
   return wordList.filter((word) => word.length === wordLength);
 };
 

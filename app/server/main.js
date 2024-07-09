@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 5000;
 
 app.use(logger);
 
-const whitelist = ["http://localhost:5173", `http://localhost:${PORT}`];
+const whitelist = (process.env.WHITELIST || "http://localhost:5000").split(",");
 const corsOptions = {
   origin: (origin, callback) => {
     if (whitelist.indexOf(origin) !== -1 || !origin) {
@@ -30,6 +30,6 @@ app.use("/api", require("./routes/api/api"));
 //   res.sendFile(path.join(__dirname, "../client/dist/index.html"));
 // });
 
-app.listen(PORT, () => {
+app.listen(PORT, "0.0.0.0", () => {
   console.log(`Server is running on port ${PORT}`);
 });

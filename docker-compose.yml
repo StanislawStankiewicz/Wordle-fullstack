@@ -1,0 +1,31 @@
+version: "3.8"
+
+services:
+  traefik:
+    build:
+      context: ./traefik
+    container_name: traefik
+    restart: always
+    command:
+      - --api.insecure=true
+      - --providers.docker
+      - --entrypoints.web.address=:80
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "./traefik/traefik.toml:/etc/traefik/traefik.toml"
+
+  app:
+    build:
+      context: ./app
+    container_name: node_app
+    restart: always
+    environment:
+      - WHITELIST=http://localhost,http://localhost:5000
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.node_app.rule=Host(`localhost`)"
+      - "traefik.http.routers.node_app.entrypoints=web"
+      - "traefik.http.services.node_app.loadbalancer.server.port=5000"

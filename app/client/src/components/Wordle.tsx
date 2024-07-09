@@ -15,7 +15,7 @@ export default function Wordle() {
     const fetchWordLength = async () => {
       try {
         const response = await fetch(
-          "http://localhost:5000/api/wordle/wordlength"
+          `${window.location.origin}/api/wordle/wordlength`
         );
         const data = await response.json();
         setWordLength(data.wordLength);
@@ -26,7 +26,7 @@ export default function Wordle() {
     const fetchGuessesAmount = async () => {
       try {
         const response = await fetch(
-          "http://localhost:5000/api/wordle/guessesamount"
+          `${window.location.origin}/api/wordle/guessesamount`
         );
         const data = await response.json();
         setGuesses(new Array(data.guessesAmount).fill(null));
@@ -41,7 +41,7 @@ export default function Wordle() {
   async function submitGuess(currentGuess: LetterInfo[]) {
     const word = currentGuess.map((letter) => letter.letter).join("");
     console.log("submitting guess", word);
-    const url = "http://localhost:5000/api/wordle/guess";
+    const url = `${window.location.origin}/api/wordle/guess`;
 
     try {
       const response = await fetch(url, {
