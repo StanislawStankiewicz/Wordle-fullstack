@@ -23,19 +23,19 @@ export default function Wordle() {
         console.error("Failed to fetch word length:", error);
       }
     };
-    const fetchGuessesAmount = async () => {
+    const fetchMaxGuesses = async () => {
       try {
         const response = await fetch(
-          `${window.location.origin}/api/wordle/guessesamount`
+          `${window.location.origin}/api/wordle/maxGuesses`
         );
         const data = await response.json();
-        setGuesses(new Array(data.guessesAmount).fill(null));
+        setGuesses(new Array(data.maxGuesses).fill(null));
       } catch (error) {
         console.error("Failed to fetch guesses amount:", error);
       }
     };
     fetchWordLength();
-    fetchGuessesAmount();
+    fetchMaxGuesses();
   }, []);
 
   async function submitGuess(currentGuess: LetterInfo[]) {
@@ -164,6 +164,5 @@ function updateLettersInfo(
       }
     }
   }
-  console.log(data);
   return data;
 }

@@ -1,6 +1,6 @@
 const WordleGame = require("../models/wordleModel");
 
-const game = new WordleGame((wordLength = 5), (guessesAmount = 6));
+const game = new WordleGame((wordLength = 5), (maxGuesses = 6));
 
 exports.checkGuess = (req, res) => {
   if (!req.body.guess) {
@@ -16,8 +16,8 @@ exports.checkGuess = (req, res) => {
   }
 };
 
-exports.getGuessesAmount = (req, res) => {
-  res.json({ guessesAmount: game.getGuessesAmount() });
+exports.getMaxGuesses = (req, res) => {
+  res.json({ maxGuesses: game.getMaxGuesses() });
 };
 
 exports.getWordLength = (req, res) => {

@@ -63,7 +63,6 @@
 @media (max-width: 1000px) {
   .wordle-keyboard-row button {
     min-width: 2.5rem;
-    min-height: 2.5rem;
     margin: 0.4rem;
   }
 }
@@ -72,11 +71,18 @@
   .wordle-keyboard-row button {
     font-size: 1.5rem;
     min-width: 2rem;
-    min-height: 2rem;
     margin: 0.2rem;
   }
   .wordle-keyboard-row img {
     width: 1.4rem;
     height: 1.4rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .wordle-keyboard-row button {
+    font-size: 0.8rem;
+    min-width: 0.8rem;
+    margin: 0.2rem;
   }
 }

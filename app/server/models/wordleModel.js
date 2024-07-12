@@ -1,13 +1,15 @@
 class WordleGame {
-  constructor(wordLength = 5, guessesAmount = 6) {
+  constructor(wordLength = 5, maxGuesses = 6, swapWordHours = 24) {
     this.wordLength = wordLength;
-    this.guessesAmount = guessesAmount;
+    this.maxGuesses = maxGuesses;
     this.wordList = require("./getWordList")(wordLength);
     this.setRandomTargetWord();
 
-    setInterval(() => {
-      this.setRandomTargetWord();
-    }, 1000 * 60 * 60 * 24);
+    if (swapWordHours > 0) {
+      setInterval(() => {
+        this.setRandomTargetWord();
+      }, 1000 * 60 * 60 * swapWordHours);
+    }
   }
 
   setRandomTargetWord() {
@@ -50,8 +52,8 @@ class WordleGame {
     return this.wordLength;
   }
 
-  getGuessesAmount() {
-    return this.guessesAmount;
+  getMaxGuesses() {
+    return this.maxGuesses;
   }
 }
 
