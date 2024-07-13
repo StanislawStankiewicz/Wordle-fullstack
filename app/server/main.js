@@ -26,6 +26,14 @@ app.use(express.static(path.join(__dirname, "../client/dist")));
 
 app.use("/api", require("./routes/api/api"));
 
+app.use((req, res) => {
+  res.status(404).json({
+    error: "Resource not found",
+    message: `The requested URL ${req.originalUrl} was not found on this server.`,
+    status: 404,
+  });
+});
+
 // app.get("*", (req, res) => {
 //   res.sendFile(path.join(__dirname, "../client/dist/index.html"));
 // });
