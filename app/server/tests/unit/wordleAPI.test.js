@@ -27,13 +27,11 @@ const wordleController = require("../../controllers/wordleController");
 
 const app = express();
 app.use(express.json());
-app.use("/wordle", router);
+
+const game = null;
+app.use("/wordle", router(game));
 
 describe("Wordle Router", () => {
-  it("should initialize the WordleGame with correct parameters", () => {
-    expect(WordleGame).toHaveBeenCalledWith(5, 6);
-  });
-
   it("should handle POST /guess", async () => {
     const response = await request(app)
       .post("/wordle/guess")
